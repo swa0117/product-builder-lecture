@@ -1,4 +1,34 @@
 /**
+ * Theme Manager
+ * Handles dark/light mode switching.
+ */
+class ThemeManager {
+  constructor() {
+    this.themeToggle = document.getElementById('theme-toggle');
+    this.modeIcon = this.themeToggle.querySelector('.mode-icon');
+    this.currentTheme = localStorage.getItem('theme') || 'dark';
+    
+    this.init();
+  }
+
+  init() {
+    this._applyTheme(this.currentTheme);
+    this.themeToggle.addEventListener('click', () => this.toggleTheme());
+  }
+
+  toggleTheme() {
+    this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+    this._applyTheme(this.currentTheme);
+    localStorage.setItem('theme', this.currentTheme);
+  }
+
+  _applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    this.modeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  }
+}
+
+/**
  * LottoBall Web Component
  * Encapsulates the visual representation of a single lotto ball.
  */
@@ -74,6 +104,7 @@ customElements.define('lotto-ball', LottoBall);
  */
 class LottoApp {
   constructor() {
+    this.themeManager = new ThemeManager();
     this.generateBtn = document.getElementById('generate-btn');
     this.ballContainer = document.getElementById('ball-container');
     this.historyList = document.getElementById('history-list');
