@@ -1,14 +1,40 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>Premium Lotto Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <div class="app-container">
+    <header>
+      <h1>LOTTO <span>GENERATOR</span></h1>
+      <p>당신의 행운을 확인해보세요</p>
+    </header>
+
+    <main id="main-content">
+      <div id="ball-container" class="ball-container">
+        <!-- Lotto balls will be injected here -->
+        <div class="placeholder">행운의 번호를 생성하려면 아래 버튼을 누르세요</div>
+      </div>
+
+      <div class="controls">
+        <button id="generate-btn" class="glow-button">번호 생성하기</button>
+      </div>
+    </main>
+
+    <section class="history-section">
+      <h2>최근 번호 내역</h2>
+      <ul id="history-list"></ul>
+    </section>
+  </div>
+
+  <div class="noise-overlay"></div>
+
+  <script type="module" src="main.js"></script>
 </body>
 </html>
