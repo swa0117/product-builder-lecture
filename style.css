@@ -289,3 +289,23 @@ header p {
   padding: 1rem;
   font-size: 1.1rem;
 }
+
+/* Comments Section */
+.comments-section {
+  margin-top: 2rem;
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--ball-shadow);
+}
+
+.comments-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}

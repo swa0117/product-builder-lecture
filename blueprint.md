@@ -12,6 +12,7 @@ A modern, interactive, and visually stunning Lotto Number Generator. Users can g
     - Responsive design using Container Queries and Flexbox/Grid.
 - **History Tracking:** A list showing previously generated sets of numbers.
 - **Cooperation Inquiry Form:** A Formspree-powered contact form for business inquiries, integrated with the app's aesthetic.
+- **Disqus Comments:** Integrated community discussion section at the bottom of the page.
 - **Tech Stack:** Vanilla HTML5, Modern CSS (Baseline), and ES6+ JavaScript.
 
 ## Current State: Implementation Complete
@@ -20,7 +21,9 @@ A modern, interactive, and visually stunning Lotto Number Generator. Users can g
 - [x] Styling (`style.css`).
 - [x] Logic & Web Components (`main.js`).
 - [x] Cooperation Inquiry Form Integration.
+- [x] Disqus Comments Integration.
 
 ## Documented History
+- **v1.2.0**: Integrated Disqus comments for community engagement.
 - **v1.1.0**: Added Cooperation Inquiry Form using Formspree.
 - **v1.0.0**: Initial setup and planning for the Lotto Number Generator.
