@@ -7,7 +7,6 @@ class ThemeManager {
     this.themeToggle = document.getElementById('theme-toggle');
     this.modeIcon = this.themeToggle.querySelector('.mode-icon');
     this.currentTheme = localStorage.getItem('theme') || 'dark';
-    this.onThemeChange = null;
     
     this.init();
   }
@@ -21,64 +20,11 @@ class ThemeManager {
     this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
     this._applyTheme(this.currentTheme);
     localStorage.setItem('theme', this.currentTheme);
-    
-    if (this.onThemeChange) {
-      this.onThemeChange(this.currentTheme);
-    }
   }
 
   _applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     this.modeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-  }
-}
-
-/**
- * Disqus Manager
- * Handles theme-aware Disqus loading and resetting.
- */
-class DisqusManager {
-  constructor(shortname, theme) {
-    this.shortname = shortname;
-    this.theme = theme;
-    this.identifier = 'lotto-generator-premium';
-    this.isLoaded = false;
-  }
-
-  init() {
-    if (!this.shortname || this.shortname.includes('demo')) {
-      console.warn('Disqus: Please configure a valid shortname in main.js');
-      return;
-    }
-
-    // Define disqus_config globally
-    window.disqus_config = this._getConfig();
-
-    // Inject script
-    const d = document, s = d.createElement('script');
-    s.src = `https://${this.shortname}.disqus.com/embed.js`;
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    
-    this.isLoaded = true;
-  }
-
-  _getConfig() {
-    const self = this;
-    return function () {
-      this.page.url = window.location.href;
-      this.page.identifier = self.identifier;
-    };
-  }
-
-  reload(newTheme) {
-    if (!this.isLoaded || typeof DISQUS === 'undefined') return;
-
-    this.theme = newTheme;
-    DISQUS.reset({
-      reload: true,
-      config: this._getConfig()
-    });
   }
 }
 
@@ -159,8 +105,6 @@ customElements.define('lotto-ball', LottoBall);
 class LottoApp {
   constructor() {
     this.themeManager = new ThemeManager();
-    this.disqusManager = new DisqusManager('lotto-generator-demo', this.themeManager.currentTheme);
-    
     this.generateBtn = document.getElementById('generate-btn');
     this.ballContainer = document.getElementById('ball-container');
     this.historyList = document.getElementById('history-list');
@@ -171,14 +115,6 @@ class LottoApp {
 
   init() {
     this.generateBtn.addEventListener('click', () => this.generateNumbers());
-    
-    // Initialize Disqus
-    this.disqusManager.init();
-
-    // Handle theme changes for Disqus
-    this.themeManager.onThemeChange = (newTheme) => {
-      this.disqusManager.reload(newTheme);
-    };
   }
 
   async generateNumbers() {
